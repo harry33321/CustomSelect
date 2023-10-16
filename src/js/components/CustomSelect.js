@@ -105,15 +105,16 @@ class CustomSelect {
             }
         });
 
-        // this.#appendCss().then(() => {
+        // this.#appendCSS();
         this.init();
         this.#setListen(true);
-        // });
     }
 
-    async #appendCss() {
+    async #appendCSS() {
         const styleId = "cs-css";
-        const css = await fetch("./components/customSelect.css")
+        if (document.getElementById(styleId)) return;
+
+        const css = await fetch("https://cdn.jsdelivr.net/gh/harry33321/custom-select/dist/custom-select.min.css")
             .then((response) => response.text())
             .then((data) => {
                 return data;
@@ -122,7 +123,7 @@ class CustomSelect {
                 console.error(error);
             });
 
-        if (!css || document.getElementById(styleId)) return;
+        if (!css) return;
 
         const style = document.createElement("style");
         style.id = styleId;

@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
 
     document.querySelectorAll('.selectWrapper').forEach((el) => {
-        let selectHtml = el.querySelector('select').outerHTML;
+        const selectHtml = el.querySelector('select').outerHTML;
 
         const codeHtml = formatCode(selectHtml);
 

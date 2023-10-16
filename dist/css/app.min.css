@@ -347,8 +347,8 @@ body:not(.loadingIsOpen) .loading {
   padding: 8px;
 }
 .cs-dropdown .cs-search {
-  all: unset;
-  box-sizing: border-box;
+  border: none;
+  outline: none;
   font-size: 14px;
   line-height: 18px;
   width: 100%;
@@ -383,7 +383,8 @@ body:not(.loadingIsOpen) .loading {
   transform-origin: center bottom;
 }
 .cs-dropdown .cs-listing {
-  all: unset;
+  list-style: none;
+  padding: 0;
   max-height: 280px;
   overflow: auto;
 }
@@ -465,8 +466,9 @@ body:not(.loadingIsOpen) .loading {
   cursor: pointer;
 }
 .cs-dropdown .cs-listing .cs-optionGroup .cs-optionGroup-label .cs-optionGroup-expandInput {
-  all: unset;
   position: absolute;
+  width: 0;
+  height: 0;
   opacity: 0;
   pointer-events: none;
 }
