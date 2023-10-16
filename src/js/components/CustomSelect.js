@@ -1,11 +1,3 @@
-if (typeof module !== "undefined" && typeof module.exports !== "undefined") {
-    module.exports = CustomSelect;
-}
-
-if (typeof window !== "undefined") {
-    window.CustomSelect = CustomSelect;
-}
-
 class CustomSelect {
     constructor(element, { options, settings, events } = {}) {
         if (typeof element !== "string" && !(element instanceof HTMLElement)) {
@@ -1037,6 +1029,12 @@ class CustomSelect {
         this.csDropdown.remove();
         this.originalSelect.style.display = "";
     }
+}
+
+if (typeof module !== "undefined" && typeof module.exports !== "undefined") {
+    module.exports = CustomSelect;
+} else {
+    window.CustomSelect = CustomSelect;
 }
 
 /***** Usage Example ******/
