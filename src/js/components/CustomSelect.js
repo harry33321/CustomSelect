@@ -1,4 +1,12 @@
-export default class CustomSelect {
+if (typeof module !== "undefined" && typeof module.exports !== "undefined") {
+    module.exports = CustomSelect;
+}
+
+if (typeof window !== "undefined") {
+    window.CustomSelect = CustomSelect;
+}
+
+class CustomSelect {
     constructor(element, { options, settings, events } = {}) {
         if (typeof element !== "string" && !(element instanceof HTMLElement)) {
             console.error("CustomSelect: target element(1st argument) is required.");
