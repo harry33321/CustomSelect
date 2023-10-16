@@ -1,0 +1,104 @@
+@use 'variables' as *;
+@use "sass:map";
+
+/******************************
+MIXIN - FONT
+******************************/
+@mixin h1 {
+    font-size: $h1_fontSize;
+    letter-spacing: $h1_letterSpacing;
+    line-height: $h1_lineHeight;
+}
+
+@mixin h2 {
+    font-size: $h2_fontSize;
+    letter-spacing: $h2_letterSpacing;
+    line-height: $h2_lineHeight;
+}
+
+@mixin h3 {
+    font-size: $h3_fontSize;
+    letter-spacing: $h3_letterSpacing;
+    line-height: $h3_lineHeight;
+}
+
+@mixin h4 {
+    font-size: $h4_fontSize;
+    letter-spacing: $h4_letterSpacing;
+    line-height: $h4_lineHeight;
+}
+
+@mixin h5 {
+    font-size: $h5_fontSize;
+    letter-spacing: $h5_letterSpacing;
+    line-height: $h5_lineHeight;
+}
+
+@mixin p1 {
+    font-size: $p1_fontSize;
+    letter-spacing: $p1_letterSpacing;
+    line-height: $p1_lineHeight;
+}
+
+@mixin p2 {
+    font-size: $p2_fontSize;
+    letter-spacing: $p2_letterSpacing;
+    line-height: $p2_lineHeight;
+}
+
+@mixin c1 {
+    font-size: $c1_fontSize;
+    letter-spacing: $c1_letterSpacing;
+    line-height: $c1_lineHeight;
+}
+
+@mixin c2 {
+    font-size: $c2_fontSize;
+    letter-spacing: $c2_letterSpacing;
+    line-height: $c2_lineHeight;
+}
+
+/******************************
+MIXIN - mxWidth
+******************************/
+@mixin mxWidth($breakpoint : 'xl') {
+    max-width: map.get($mxWidth, $breakpoint);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: map.get($gridMargin, $breakpoint);
+    padding-right: map.get($gridMargin, $breakpoint);
+}
+
+@mixin gutter($breakpoint : 'xl') {
+    padding-left: map.get($gridMargin, $breakpoint);
+    padding-right: map.get($gridMargin, $breakpoint);
+}
+
+@mixin btnReset {
+	border: 0;
+	margin: 0;
+	padding: 0;
+	background-color: transparent;
+}
+
+@mixin scrollBar {
+    // for firefox
+    scrollbar-color: $color_white_200 transparent;
+    scrollbar-width: thin;
+
+    // for chrome
+    &::-webkit-scrollbar {
+        -webkit-appearance: none;
+        width: 4px;
+        height: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 8px;
+        background-color: $color_white_200;
+    }
+
+    &::-webkit-scrollbar-corner {
+        background-color: transparent;
+    }
+}

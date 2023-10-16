@@ -1,0 +1,395 @@
+$cs-textColor: #000000;
+$cs-hoverBgColor: #d9e0f6;
+$cs-hoverTextColor: #000000;
+$cs-selectedBgColor: #011c70;
+$cs-selectedTextColor: #ffffff;
+$cs-disabledBgColor: #dbdbdb;
+$cs-searchMarkColor: mark;
+
+$cs-optionPadding: 8px 12px;
+
+.cs-select {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    width: 100%;
+    min-height: 36px;
+    padding: 8px 12px;
+    border: 1px solid #aaaaaa;
+    border-radius: 6px;
+    background-color: #ffffff;
+    user-select: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+
+    &:hover,
+    &:focus,
+    &:focus-visible {
+        &:not(.cs-disabled) {
+            outline: none;
+            border-color: #555555;
+        }
+    }
+
+    &.cs-disabled {
+        background-color: $cs-disabledBgColor;
+        pointer-events: none;
+    }
+
+    &.cs-open-up,
+    &.cs-open-down {
+        .cs-arrow {
+            transform: rotate(180deg);
+        }
+    }
+
+    .cs-label {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+
+        .cs-selectedItem {
+            font-size: 14px;
+            line-height: 18px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 8px;
+            border-radius: 9999px;
+            background-color: $cs-hoverBgColor;
+            border: 1px solid $cs-selectedBgColor;
+
+            .cs-selectedItem-label {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .cs-selectedItem-remove {
+                flex-shrink: 0;
+                width: 12px;
+                height: 12px;
+                background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="grey" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="6" x2="18" y2="18" /><line x1="18" y1="6" x2="6" y2="18" /></svg>');
+                background-repeat: no-repeat;
+                background-position: center;
+                transition: filter 0.2s;
+                cursor: pointer;
+
+                &:hover {
+                    filter: brightness(0.5);
+                }
+            }
+        }
+    }
+
+    .cs-placeholder {
+        color: #aaaaaa;
+    }
+}
+
+.cs-dropdown {
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: min-content;
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(#aaaaaa, 0.6);
+    transition: opacity 0.2s, transform 0.2s;
+    transform-origin: center top;
+
+    &.cs-relative {
+        position: relative;
+        min-width: auto;
+        height: 100%;
+        box-shadow: none;
+    }
+
+    .cs-searchWrapper {
+        padding: 8px;
+    }
+
+    .cs-search {
+        all: unset;
+        box-sizing: border-box;
+        font-size: 14px;
+        line-height: 18px;
+        width: 100%;
+        padding: 6px 8px;
+        border-radius: 8px;
+        border: 1px solid #cccccc;
+        background-repeat: no-repeat;
+        background-position: center right 12px;
+        background-size: 16px;
+
+        &:placeholder-shown {
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>');
+        }
+
+        &::-webkit-search-cancel-button {
+            -webkit-appearance: none;
+            height: 16px;
+            width: 16px;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="6" x2="18" y2="18" /><line x1="18" y1="6" x2="6" y2="18" /></svg>');
+            background-repeat: no-repeat;
+            background-position: center;
+            cursor: pointer;
+        }
+    }
+
+    &:not(.cs-open-down, .cs-open-up) {
+        opacity: 0;
+        transform: scaleY(0);
+    }
+
+    &.cs-open-up {
+        flex-direction: column-reverse;
+        transform-origin: center bottom;
+    }
+
+    .cs-listing {
+        all: unset;
+        max-height: 280px;
+        overflow: auto;
+
+        &::-webkit-scrollbar {
+            -webkit-appearance: none;
+            width: 6px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            border-radius: 8px;
+            background-color: #aaaaaa;
+        }
+
+        &:has(.cs-checkbox) {
+            padding-bottom: 8px;
+
+            &:only-child {
+                padding: 8px 0;
+            }
+        }
+
+        // > :first-child {
+        //     padding-top: 16px;
+        // }
+
+        // > :last-child {
+        //     padding-bottom: 16px;
+        // }
+
+        .cs-option {
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            padding: $cs-optionPadding;
+            color: $cs-textColor;
+            cursor: pointer;
+
+            &:has(.cs-checkbox) {
+                padding: 4px 12px;
+            }
+
+            &:hover {
+                &:not(.cs-optionGroup, .cs-disabled, .cs-selected) {
+                    &:not(:has(.cs-checkbox)) {
+                        background-color: $cs-hoverBgColor;
+                        color: $cs-hoverTextColor;
+                    }
+                }
+            }
+
+            &.cs-selectedSome {
+                &::before {
+                    background-image: url('data:image/svg+xml,<svg width="100%" height="100%" viewBox="0 0 20 20" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="currentColor" stroke-width="2" xmlns="http://www.w3.org/2000/svg"><path d="M4,10 L16,10" /></svg>');
+                }
+            }
+
+            &.cs-selected {
+                &:not(:has(.cs-checkbox)) {
+                    background-color: $cs-selectedBgColor;
+                    color: $cs-selectedTextColor;
+                }
+
+                .cs-checkbox::before {
+                    background-image: url('data:image/svg+xml,<svg width="100%" height="100%" viewBox="0 0 20 20" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="currentColor" stroke-width="2" xmlns="http://www.w3.org/2000/svg"><path d="M4,10 L8,14 L16,6" /></svg>');
+                }
+            }
+
+            &.cs-highlighted {
+                &:not(:has(.cs-checkbox)) {
+                    background-color: $cs-hoverBgColor;
+                    color: $cs-hoverTextColor;
+                }
+
+                .cs-checkbox::before {
+                    background-color: $cs-hoverBgColor;
+                }
+            }
+
+            &.cs-disabled {
+                background-color: $cs-disabledBgColor;
+                pointer-events: none;
+            }
+
+            &.cs-hidden,
+            &.cs-selectedHidden {
+                display: none;
+            }
+
+            .cs-searchMark {
+                background-color: $cs-searchMarkColor;
+            }
+
+            .cs-checkbox {
+                pointer-events: none;
+            }
+        }
+
+        .cs-optionGroup {
+            display: block;
+
+            .cs-optionGroup-label {
+                font-weight: bold;
+                white-space: nowrap;
+                position: sticky;
+                top: 0;
+                z-index: 1;
+                background-color: white;
+                display: flex;
+                align-items: center;
+                padding: $cs-optionPadding;
+                cursor: default;
+
+                &:has(.cs-optionGroup-expandInput) {
+                    cursor: pointer;
+                }
+
+                .cs-optionGroup-expandInput {
+                    all: unset;
+                    position: absolute;
+                    opacity: 0;
+                    pointer-events: none;
+                }
+
+                .cs-arrow {
+                    transform: rotate(180deg);
+                }
+            }
+
+            .cs-optionGroup-listing {
+                list-style: none;
+                padding: 0;
+
+                .cs-option {
+                    padding-left: 28px;
+                }
+
+                .cs-optionGroup {
+                    .cs-optionGroup-label {
+                        position: static;
+                        padding-left: 28px !important;
+                    }
+
+                    .cs-optionGroup-listing {
+                        padding-left: 16px;
+                    }
+                }
+            }
+
+            &:has(.cs-option .cs-checkbox) {
+                .cs-optionGroup-label {
+                    padding: 4px 12px;
+                }
+            }
+
+            &:has(.cs-option.cs-selected) {
+                > .cs-optionGroup-label {
+                    .cs-checkbox::before {
+                        background-image: url('data:image/svg+xml,<svg width="100%" height="100%" viewBox="0 0 20 20" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="currentColor" stroke-width="2" xmlns="http://www.w3.org/2000/svg"><path d="M4,10 L16,10" /></svg>');
+                    }
+                }
+
+                &:not(:has(.cs-option:not(.cs-selected))) {
+                    .cs-optionGroup-label {
+                        .cs-checkbox::before {
+                            background-image: url('data:image/svg+xml,<svg width="100%" height="100%" viewBox="0 0 20 20" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="currentColor" stroke-width="2" xmlns="http://www.w3.org/2000/svg"><path d="M4,10 L8,14 L16,6" /></svg>');
+                        }
+                    }
+                }
+            }
+
+            &:has(> .cs-optionGroup-label .cs-optionGroup-expandInput) {
+                &:not(:has(> .cs-optionGroup-label .cs-optionGroup-expandInput:checked)) {
+                    .cs-arrow {
+                        transform: rotate(0deg);
+                    }
+
+                    .cs-optionGroup-listing {
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        .cs-searchNoResult {
+            padding: $cs-optionPadding;
+            color: $cs-textColor;
+        }
+    }
+}
+
+.cs-arrow {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    margin-left: auto;
+    transition: all 0.2s;
+
+    svg {
+        width: 100%;
+        height: 100%;
+        padding: 6px;
+
+        path {
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 4;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+    }
+}
+
+.cs-checkbox {
+    flex-shrink: 0;
+
+    &::before {
+        content: "";
+        box-sizing: border-box;
+        flex-shrink: 0;
+        display: block;
+        width: 24px;
+        height: 24px;
+        margin-right: 4px;
+        border-radius: 4px;
+        border: 1px solid #dee2e6;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 16px;
+        cursor: pointer;
+    }
+}
+
+.cs-dndHandle {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    margin-right: 4px;
+
+    svg {
+        width: 100%;
+        height: 100%;
+        fill: currentColor;
+    }
+}

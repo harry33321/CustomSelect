@@ -1,0 +1,26 @@
+@use '../base/mixin' as *;
+@use '../base/variables' as *;
+
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    max-width: 828px;
+    margin: 0 auto;
+    padding: 100px 20px;
+}
+
+.selectWrapper {
+    width: 200px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 8px;
+}
+
+code {
+    @include c1;
+}

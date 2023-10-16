@@ -1,0 +1,57 @@
+@use 'mixin' as *;
+@use 'variables' as *;
+
+:root {
+    // --headerHeight: 64px;
+    // --footerHeight: 48px;
+}
+
+::placeholder {
+    color: $color_white_600;
+}
+
+:-ms-input-placeholder {
+    color: $color_white_600;
+}
+
+body, html {
+    font-family: $fontFamily_base;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: none;
+    @include p1;
+    color: $color_text;
+}
+
+label, input, select, textarea, button {
+    font-family: $fontFamily_base;
+}
+
+img, svg {
+    display: block;
+    vertical-align: middle;
+}
+
+span {
+    vertical-align: middle;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    @include btnReset;
+    cursor: pointer;
+}
+
+h1, .h1 {@include h1;}
+h2, .h2 {@include h2;}
+h3, .h3 {@include h3;}
+h4, .h4 {@include h4;}
+h5, .h5 {@include h5;}
+
+.p1 {@include p1;}
+.p2 {@include p2;}
+.c1 {@include c1;}
+.c2 {@include c1;}

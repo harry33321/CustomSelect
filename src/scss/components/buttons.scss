@@ -1,0 +1,38 @@
+@use '../base/mixin' as *;
+@use '../base/variables' as *;
+
+.cBtn {
+    @include h4;
+    font-weight: 400;
+    text-align: center;
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: $s3;
+    transition: all 0.25s;
+    cursor: pointer;
+
+    &__withIcon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: $s3;
+
+        svg {
+            flex-shrink: 0;
+        }
+    }
+
+    &__primary {
+        background-color: $color_orange;
+        color: $color_white;
+
+        // &:hover {
+        //     background-color: $color_orange_600;
+        // }
+
+        // &:active {
+        //     background-color: $color_orange_700;
+        // }
+    }
+}

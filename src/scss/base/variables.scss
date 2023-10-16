@@ -1,0 +1,191 @@
+@use 'fonts';
+
+/******************************
+COLOR
+******************************/
+$color_black: #000000 !default;
+$color_white: #FFFFFF !default;
+$color_white_50: #FFFFFF !default;
+$color_white_100: #FFFFFF !default;
+$color_white_200: #F7F8FA !default;
+$color_white_300: #F3F3F5 !default;
+$color_white_400: #E1E1E5 !default;
+$color_white_500: #D4D4D9 !default;
+$color_white_600: #C6C6CC !default;
+$color_white_700: #B8B8BF !default;
+$color_white_800: #ABABB2 !default;
+$color_white_900: #A1A1A6 !default;
+
+$color_orange: #FF6A39 !default;
+$color_orange_50: #FFF0EB !default;
+$color_orange_100: #FFE2D8 !default;
+$color_orange_200: #FFD2C3 !default;
+$color_orange_300: #FFC3AF !default;
+$color_orange_400: #FFB49C !default;
+$color_orange_500: #FFA689 !default;
+$color_orange_600: #FF9674 !default;
+$color_orange_700: #FF8760 !default;
+$color_orange_800: #FF7A4D !default;
+$color_orange_900: #FF6A39 !default;
+
+$color_blue: #00A3E0 !default;
+$color_blue_50: #E5F5FB !default;
+$color_blue_100: #CCECF7 !default;
+$color_blue_200: #B1E3F5 !default;
+$color_blue_300: #99DAF2 !default;
+$color_blue_400: #7FD1EF !default;
+$color_blue_500: #66C8EC !default;
+$color_blue_600: #4DBFE9 !default;
+$color_blue_700: #33B5E6 !default;
+$color_blue_800: #18ACE3 !default;
+$color_blue_900: #00A3E0 !default;
+
+$color_darkBlue: #071D49 !default;
+$color_darkBlue_50: #E6E8EC !default;
+$color_darkBlue_100: #CDD1DA !default;
+$color_darkBlue_200: #B4BBC8 !default;
+$color_darkBlue_300: #9CA5B6 !default;
+$color_darkBlue_400: #838EA3 !default;
+$color_darkBlue_500: #6A7791 !default;
+$color_darkBlue_600: #51607F !default;
+$color_darkBlue_700: #37496D !default;
+$color_darkBlue_800: #1F335B !default;
+$color_darkBlue_900: #071D49 !default;
+
+$color_error: #CE1111 !default;
+
+/******************************
+BASE COLOR
+******************************/
+$color_text: $color_black !default;
+$color_textBase: $color_text !default;
+$color_textBaseSmall: $color_text !default;
+
+/******************************
+FONT
+******************************/
+$h1_fontSize: 32px !default;
+$h1_lineHeight: 40px !default;
+$h1_letterSpacing: 0.66px !default;
+
+$h2_fontSize: 28px !default;
+$h2_lineHeight: 40px !default;
+$h2_letterSpacing: 0.6px !default;
+
+$h3_fontSize: 24px !default;
+$h3_lineHeight: 32px !default;
+$h3_letterSpacing: 0.5px !default;
+
+$h4_fontSize: 20px !default;
+$h4_lineHeight: 32px !default;
+$h4_letterSpacing: 0.33px !default;
+
+$h5_fontSize: 18px !default;
+$h5_lineHeight: 28px !default;
+$h5_letterSpacing: 0.3px !default;
+
+$p1_fontSize: 16px !default;
+$p1_lineHeight: 24px !default;
+$p1_letterSpacing: 0.27px !default;
+
+$p2_fontSize: 14px !default;
+$p2_lineHeight: 24px !default;
+$p2_letterSpacing: 0.23px !default;
+
+$c1_fontSize: 12px !default;
+$c1_lineHeight: 18px !default;
+$c1_letterSpacing: 0.2px !default;
+
+$c2_fontSize: 12px !default;
+$c2_lineHeight: 18px !default;
+$c2_letterSpacing: 0.2px !default;
+
+/******************************
+BREAKPOINT
+******************************/
+$breakpoint_xs: 768px !default;
+$breakpoint_sm: 1024px !default;
+$breakpoint_md: 1280px !default;
+$breakpoint_lg: 1440px !default;
+
+$xsMax: '(max-width:' + ($breakpoint_xs - 1px) + ')';
+$xsMin: '(min-width:' + $breakpoint_xs + ')';
+$smMax: '(max-width:' + ($breakpoint_sm - 1px) + ')';
+$smMin: '(min-width:' + $breakpoint_sm + ')';
+$mdMax: '(max-width:' + ($breakpoint_md - 1px) + ')';
+$mdMin: '(min-width:' + $breakpoint_md + ')';
+$lgMax: '(max-width:' + ($breakpoint_lg - 1px) + ')';
+$lgMin: '(min-width:' + $breakpoint_lg + ')';
+
+$range_xs_sm: '(min-width: ' + $breakpoint_xs + ') and (max-width: ' + ($breakpoint_sm - 1px) + ')';
+$range_xs_md: '(min-width: ' + $breakpoint_xs + ') and (max-width: ' + ($breakpoint_md - 1px) + ')';
+$range_xs_lg: '(min-width: ' + $breakpoint_xs + ') and (max-width: ' + ($breakpoint_lg - 1px) + ')';
+$range_sm_md: '(min-width: ' + $breakpoint_sm + ') and (max-width: ' + ($breakpoint_md - 1px) + ')';
+$range_sm_lg: '(min-width: ' + $breakpoint_sm + ') and (max-width: ' + ($breakpoint_lg - 1px) + ')';
+$range_md_lg: '(min-width: ' + $breakpoint_md + ') and (max-width: ' + ($breakpoint_lg - 1px) + ')';
+
+/******************************
+FONTS
+******************************/
+$fontFamily_sansSerif: Arial, Helvetica, sans-serif !default;
+
+$fontFamily_serif: 'Baskervville', 'Times New Roman', Times, '微軟正黑體', 'Microsoft JhengHei', 'Heiti TC', 'LiHei Pro', '新細明體', 'PMingLiU', serif !default;
+$fontFamily_monospace: Menlo, Monaco, Consolas, 'Courier New', '微軟正黑體', 'Microsoft JhengHei', 'Heiti TC', 'LiHei Pro', '新細明體', 'PMingLiU', monospace !default;
+
+$fontFamily_base: $fontFamily_sansSerif !default;
+
+/******************************
+SPACING
+******************************/
+$s1 : 4px !default;
+$s2 : 8px !default;
+$s3 : 12px !default;
+$s4 : 16px !default;
+$s5 : 20px !default;
+$s6 : 24px !default;
+$s7 : 32px !default;
+$s8 : 40px !default;
+$s9 : 48px !default;
+$s10 : 56px !default;
+$s11 : 64px !default;
+$s12 : 72px !default;
+$s13 : 80px !default;
+$s14 : 96px !default;
+$s15 : 120px !default;
+
+/******************************
+GRID
+******************************/
+$grid_margin_xs: $s5; //*
+$grid_margin_sm: $s5;
+$grid_margin_md: $s5;
+$grid_margin_lg: $s5;
+$grid_margin_xl: $s5; //*
+
+$gridMargin: (
+    "xs" : $grid_margin_xs,
+    "sm" : $grid_margin_sm,
+    "md" : $grid_margin_md,
+    "lg" : $grid_margin_lg,
+    "xl" : $grid_margin_xl,
+);
+
+$gutter_xs: $s5; //*
+$gutter_sm: $s5;
+$gutter_md: $s5;
+$gutter_lg: $s5;
+$gutter_xl: $s5; //*
+
+$mxWidth_xs: 100%; //*
+$mxWidth_sm: 100%;
+$mxWidth_md: 100%;
+$mxWidth_lg: 1440px;
+$mxWidth_xl: 1440px; //*
+
+$mxWidth: (
+    "xs" : $mxWidth_xs,
+    "sm" : $mxWidth_sm,
+    "md" : $mxWidth_md,
+    "lg" : $mxWidth_lg,
+    "xl" : $mxWidth_xl,
+);

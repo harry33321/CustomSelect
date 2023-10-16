@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Select</title>
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark-dimmed.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+    <!-- and it's easy to individually load additional languages -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/javascript.min.js"></script>
+
+    <link rel="stylesheet" href="./css/app.min.css">
+    <link rel="stylesheet" href="./css/index.min.css">
+</head>
+
+<body>
+    <main>
+        <div class="container">
+            <span class="title">Simple Usage</span>
+
+            <div class="selectWrapper">
+                <select id="customSelect_single">
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <optgroup label="Group 1">
+                        <option value="3">Option 3</option>
+                        <option value="4">Option 4</option>
+                        <option value="5">Option 5</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <pre><code>
+                import CustomSelect from "/path/to/CustomSelect.js";
+
+                new CustomSelect("#customSelect_single");       // html element || css selector
+            </code></pre>
+        </div>
+
+        <div class="container">
+            <span class="title">Mutiple Select</span>
+
+            <div class="selectWrapper">
+                <select id="customSelect_multiple" multiple>
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <optgroup label="Group 1">
+                        <option value="3">Option 3</option>
+                        <option value="4">Option 4</option>
+                        <option value="5">Option 5</option>
+                    </optgroup>
+                </select>
+            </div>
+        </div>
+
+        <div class="container">
+            <span class="title">Configs</span>
+
+            <pre><code>
+                const select = new CustomSelect("#select", {
+                    options: [                          // if options is empty, it will get options from html select element
+                        {
+                            <!-- option config -->
+                            label: "Option 1",          // Required
+                            value: "Option 1",          // Optional - if value is empty, it will be same as label
+                            id: "1",                    // Optional - if id is empty, it will be generated automatically
+                            placeholder: false,         // Optional - if placeholder is true, it will be light gray color as placeholder when it is selected & the value will be empty
+                            selected: false,            // Optional
+                            disabled: false,            // Optional
+                            hidden: false,              // Optional
+                            class: "",                  // Optional
+                            style: "",                  // Optional
+                        },
+                        { 
+                            <!-- optgroup config -->
+                            label: "Group 1",           // Required - if options is set, it will be a group label
+                            options: [                  // Optional - support multiple level
+                                { label: "Option 2", value: "Option 2" },
+                                { label: "Option 3", value: "Option 3" },
+                            ],
+                            groupExpanded: "off",       // Optional - true (default) || false || "off"
+                        },
+                    ],
+                    settings: {                        
+                        alwaysOpen: false,
+                        closeOnSelect: true,
+                        openDirection: "auto",          // "auto" (default) || "up" || "down"
+                        openPosition: "absolute",       // "absolute" (default) || "relative"
+                        openLocation: "body",           // html element || css selector
+                        searchEnable: true,
+                        searchPlaceholder: "Search",
+                        searchNoResult: "No result",
+                        searchMark: true,
+                        selectedOptionHidden: false,
+                        showCheckbox: false,
+                        classNames: {                   // e.g. { select: "class1 class2 class3" }
+                            select: "cs-select",
+                            label: "cs-label",
+                            dropdown: "cs-dropdown",
+                            listing: "cs-listing",
+                            option: "cs-option",
+                            optionGroup: "cs-optionGroup",
+                            optionGroupLabel: "cs-optionGroup-label",
+                            optionGroupExpandInput: "cs-optionGroup-expandInput",
+                            optionGroupListing: "cs-optionGroup-listing",
+                            arrow: "cs-arrow",
+                            checkbox: "cs-checkbox",
+                            relative: "cs-relative",
+                            openUp: "cs-open-up",
+                            openDown: "cs-open-down",
+                            selected: "cs-selected",
+                            highlighted: "cs-highlighted",
+                            disabled: "cs-disabled",
+                            hidden: "cs-hidden",
+                            selectedHidden: "cs-selectedHidden",
+                            placeholder: "cs-placeholder",
+                            searchWrapper: "cs-searchWrapper",
+                            search: "cs-search",
+                            searchNoResult: "cs-searchNoResult",
+                            searchMark: "cs-searchMark",
+                            selectedItem: "cs-selectedItem",
+                            selectedItemLabel: "cs-selectedItem-label",
+                            selectedItemRemove: "cs-selectedItem-remove",
+                        },
+                    },
+                    events: {
+                        beforeOpen: () => {
+                            console.log('beforeOpen');
+                        },
+                        afterOpen: () => {
+                            console.log('afterOpen');
+                        },
+                        beforeClose: () => {
+                            console.log('beforeClose');
+                        },
+                        afterClose: () => {
+                            console.log('afterClose');
+                        },
+                        beforeChange: (newVal, oldVal) => {
+                            console.log("[newVal]", newVal);
+                            console.log("[oldVal]", oldVal);
+                            // return false will stop the change from happening
+                        },
+                        afterChange: (newVal) => {
+                            console.log("[newVal]", newVal);
+                        },
+                    }
+                });
+
+                select.getSelectedValue();              // return string || array (if multiple select)
+                select.setSelectedValue("value");       // if multiple select, value can be array
+                select.getSelectedObj();
+                select.getOptionElBy("key", "value");
+                select.getOptionObjBy("key", "value");
+                select.getOptions();
+                select.setOptions([]);
+                select.enable();
+                select.disable();
+                select.destroy();                       // it will revert to the original select element and remove all event listeners
+            </code></pre>
+        </div>
+
+        <div class="container">
+            <span class="title">Placeholder</span>
+            <p>
+                for HTML - option of data-placeholder="true" must set the value to empty string
+            </p>
+
+            <div class="selectWrapper">
+                <select id="customSelect_placeholder">
+                    <option value="" data-placeholder="true">Please select</option>
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <optgroup label="Group 1">
+                        <option value="3">Option 3</option>
+                        <option value="4">Option 4</option>
+                        <option value="5">Option 5</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <pre><code class="language-javascript">
+                // if options is pass by javascript
+                
+                new CustomSelect("#customSelect_placeholder", {
+                    options: [                          // if options is empty, it will get options from html select element
+                        {
+                            label: "Please select",
+                            value: "",
+                            placeholder: true,          // Optional - if placeholder is true, it will be light gray color as placeholder when it is selected & the value will be empty
+                        },
+                        {
+                            label: "Option 1",
+                            value: "1",
+                        },
+                        {
+                            label: "Option 2",
+                            value: "2",
+                        },
+                        {
+                            label: "Group 1",
+                            options: [
+                                {
+                                    label: "Option 3",
+                                    value: "3",
+                                },
+                                {
+                                    label: "Option 4",
+                                    value: "4",
+                                },
+                                {
+                                    label: "Option 5",
+                                    value: "5",
+                                },
+                            ],
+                        },
+                    ],
+                });
+            </code></pre>
+        </div>
+
+        <div class="container">
+            <span class="title">Checkbox Style</span>
+
+            <div class="selectWrapper">
+                <select id="customSelect_checkbox">
+                    <option value="" data-placeholder="true">Please select</option>
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <optgroup label="Group 1">
+                        <option value="3">Option 3</option>
+                        <option value="4">Option 4</option>
+                        <option value="5">Option 5</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <pre><code class="language-javascript">
+                new CustomSelect("#customSelect_checkbox", {
+                    settings: {
+                        showCheckbox: true,
+                    },
+                });
+            </code></pre>
+        </div>
+
+        <div class="container">
+            <span class="title">Sort Mode</span>
+            <p>
+                Usually use for table column setting
+            </p>
+
+            <div class="selectWrapper">
+                <select id="customSelect_sortMode" multiple>
+                    <option value="firstName" selected>First Name</option>
+                    <option value="lastName" selected>Last Name</option>
+                    <option value="gender">Gender</option>
+                    <option value="phone" selected>Phone</option>
+                    <option value="email" selected>Email</option>
+                </select>
+            </div>
+
+            <pre><code class="language-javascript">
+                const customSelect_sortMode = new CustomSelect("#customSelect_sortMode", {
+                    settings: {
+                        closeOnSelect: false,
+                        searchEnable: false,
+                        sortMode: true,
+                        checkboxMode: true,
+                        maxValuesShown: -1,
+                        maxValuesLabel: "Column Setting",
+                    },
+                    events: {
+                        afterSort: (newOptions) => {
+                            console.log("[newOptions]", newOptions);
+                        },
+                    }
+                });
+
+                const sortedOptions = customSelect_sortMode.getSortedOptions();
+            </code></pre>
+        </div>
+    </main>
+
+    <script type="module" src="./js/index.min.js"></script>
+</body>
+
+</html>
