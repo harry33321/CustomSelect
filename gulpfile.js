@@ -94,18 +94,6 @@ const customselect = () => {
     return src('src/js/components/customselect.js')
         .pipe(named())
         .pipe(
-            babel({
-                presets: ['@babel/env'],
-                plugins: ['@babel/plugin-proposal-optional-chaining'],
-            })
-        )
-        .pipe(
-            webpack({
-                mode: 'development',
-                devtool: 'inline-source-map',
-            })
-        )
-        .pipe(
             rename(function (path) {
                 return {
                     dirname: path.dirname,
@@ -115,7 +103,7 @@ const customselect = () => {
             })
         )
         .pipe(mode.production(terser({ output: { comments: false } })))
-        .pipe(dest('dist'));
+        .pipe(dest('./'));
 }
 
 const customselect_css = () => {
@@ -132,7 +120,7 @@ const customselect_css = () => {
             })
         )
         .pipe(mode.production(csso()))
-        .pipe(dest('dist'));
+        .pipe(dest('./'));
 }
 
 // watch task
@@ -142,6 +130,7 @@ const watchForChanges = () => {
     // watch('php/**/*.php', phpGenerator);
     watch('src/**/*.js', js);
     watch('src/assets/**/*', copyAssets);
+    watch('src/js/components/customselect.js', customselect);
 };
 
 // public tasks

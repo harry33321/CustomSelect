@@ -1,5 +1,4 @@
-// import CustomSelect from "../components/CustomSelect.js";
-import CustomSelect from "../../../dist/customselect.min.js";
+import CustomSelect from "../components/CustomSelect.js";
 
 document.addEventListener('DOMContentLoaded', (event) => {
     document.querySelectorAll('pre code').forEach((el) => {

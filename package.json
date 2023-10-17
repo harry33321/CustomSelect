@@ -1,16 +1,33 @@
 {
-    "name": "custom-select",
-    "version": "1.0.0",
-    "description": "",
-    "main": "dist/customselect.min.js",
+    "name": "custom-select.js",
+    "version": "1.0.1",
+    "description": "Custom select with search and multiple select",
+    "main": "customselect.min.js",
+    "keywords": [
+        "select",
+        "multipleselect",
+        "search",
+        "dropdown"
+    ],
+    "author": "Harry Lam <harry33321@gmail.com>",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/harry33321/custom-select.git"
+    },
+    "homepage": "https://harry33321.github.io/custom-select/",
+    "bugs": {
+        "url": "https://github.com/harry33321/custom-select/issues"
+    },
+    "files": [
+        "customselect.min.js",
+        "customselect.min.css"
+    ],
     "scripts": {
         "watch": "gulp",
         "dev": "gulp --development",
         "build": "gulp build --production"
     },
-    "keywords": ["Custom Select"],
-    "author": "Harry Lam",
-    "license": "ISC",
     "devDependencies": {
         "@babel/core": "^7.10.2",
         "@babel/plugin-proposal-optional-chaining": "^7.16.0",
