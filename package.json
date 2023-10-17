@@ -1,8 +1,8 @@
 {
     "name": "custom-select",
-    "version": "1.0.1",
+    "version": "1.0.0",
     "description": "",
-    "main": "dist/custom-select.min.js",
+    "main": "dist/customselect.min.js",
     "scripts": {
         "watch": "gulp",
         "dev": "gulp --development",

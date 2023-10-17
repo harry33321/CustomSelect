@@ -90,6 +90,51 @@ const phpGenerator = () => {
         .pipe(dest('dist'));
 };
 
+const customselect = () => {
+    return src('src/js/components/customselect.js')
+        .pipe(named())
+        .pipe(
+            babel({
+                presets: ['@babel/env'],
+                plugins: ['@babel/plugin-proposal-optional-chaining'],
+            })
+        )
+        .pipe(
+            webpack({
+                mode: 'development',
+                devtool: 'inline-source-map',
+            })
+        )
+        .pipe(
+            rename(function (path) {
+                return {
+                    dirname: path.dirname,
+                    basename: path.basename,
+                    extname: '.min.js',
+                };
+            })
+        )
+        .pipe(mode.production(terser({ output: { comments: false } })))
+        .pipe(dest('dist'));
+}
+
+const customselect_css = () => {
+    return src('src/scss/components/customselect.scss')
+        .pipe(sass().on('error', sass.logError))
+        .pipe(autoprefixer())
+        .pipe(
+            rename(function (path) {
+                return {
+                    dirname: path.dirname,
+                    basename: path.basename,
+                    extname: '.min.css',
+                };
+            })
+        )
+        .pipe(mode.production(csso()))
+        .pipe(dest('dist'));
+}
+
 // watch task
 const watchForChanges = () => {
     watch('src/scss/**/*.scss', css);
@@ -100,5 +145,5 @@ const watchForChanges = () => {
 };
 
 // public tasks
-exports.default = series(clean, parallel(css, css_page, js, copyAssets), watchForChanges);
-exports.build = series(clean, parallel(css, css_page, js, copyAssets));
+exports.default = series(clean, parallel(css, css_page, js, copyAssets, customselect, customselect_css), watchForChanges);
+exports.build = series(clean, parallel(css, css_page, js, copyAssets, customselect, customselect_css));
