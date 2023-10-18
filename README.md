@@ -4,15 +4,40 @@
 
 ## Installation
 
+With [NPM](https://www.npmjs.com/package/custom-select.js):
+
 ```bash
 npm install custom-select.js
 ```
 
-### or
+From a [CDN](https://www.jsdelivr.com/package/npm/custom-select.js):
+
+**Note:** There is sometimes a delay before the latest version of Choices is reflected on the CDN.
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/custom-select.js@latest/customselect.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/custom-select.js@latest/customselect.min.css" />
+
+<script src="https://cdn.jsdelivr.net/npm/custom-select.js@latest/customselect.min.js"></script>
+```
+
+## Simple Usage
+
+```html
+<select id="customSelect_single">
+    <option value="1">Option 1</option>
+    <option value="2">Option 2</option>
+    <optgroup label="Group 1">
+        <option value="3">Option 3</option>
+        <option value="4">Option 4</option>
+        <option value="5">Option 5</option>
+    </optgroup>
+</select>
+```
+
+```js
+import CustomSelect from 'custom-select.js'
+
+new CustomSelect("#customSelect_single");
 ```
 
 ## Configs
@@ -70,6 +95,7 @@ const customSelect = new CustomSelect("#customSelect", {
         sortMode: false,
         maxValuesShown: 20,
         maxValuesLabel: "{count} selected",  // {count} will be replaced with the number of selected values
+        allowHTML: false,
         classNames: {                        // e.g. { select: "class1 class2 class3" }
             select: "cs-select",
             label: "cs-label",
@@ -139,3 +165,206 @@ customSelect.disable();                       // it will revert to the original 
 customSelect.destroy();
 customSelect.getSortedOptions();
 ```
+
+## Configuration Options
+
+### alwaysOpen
+
+**Type:** `Boolean` **Default:** `false`
+
+**Usage:** Whether the dropdown should always be open.
+
+### closeOnSelect
+
+**Type:** `Boolean` **Default:** `true`
+
+**Usage:** Whether the dropdown should be closed after an option is selected.
+
+### openDirection
+
+**Type:** `String` **Default:** `"auto"` **Options:** `"auto"`, `"up"`, `"down"`
+
+**Usage:** The direction of the dropdown when it is opened.
+
+### openPosition
+
+**Type:** `String` **Default:** `"absolute"` **Options:** `"absolute"`, `"relative"`
+
+**Usage:** The position of the dropdown when it is opened.
+
+### openLocation
+
+**Type:** `HTMLElement` or `String` **Default:** `"body"`
+
+**Usage:** The location of the dropdown when it is opened.
+
+### searchEnable
+
+**Type:** `Boolean` **Default:** `true`
+
+**Usage:** Whether the search input should be shown.
+
+### searchPlaceholder
+
+**Type:** `String` **Default:** `"Search"`
+
+**Usage:** The placeholder of the search input.
+
+### searchNoResult
+
+**Type:** `String` **Default:** `"No result"`
+
+**Usage:** The text to show when there is no result.
+
+### searchMark
+
+**Type:** `Boolean` **Default:** `true`
+
+**Usage:** Whether the search result should be highlighted.
+
+### selectedOptionHidden
+
+**Type:** `Boolean` **Default:** `false`
+
+**Usage:** Whether the selected option should be hidden in the dropdown.
+
+### checkboxMode
+
+**Type:** `Boolean` **Default:** `false`
+
+**Usage:** If true, the options will apply checkbox style.
+
+### sortMode
+
+**Type:** `Boolean` **Default:** `false`
+
+**Usage:** If true, the options will be in sort mode. **Note:** Required to `npm install sortablejs`
+
+### maxValuesShown
+
+**Type:** `Number` **Default:** `20`
+
+**Usage:** The maximum number of values to show in the selected box.
+
+### maxValuesLabel
+
+**Type:** `String` **Default:** `"{count} selected"`
+
+**Usage:** The label to show when the number of selected values is more than `maxValuesShown`. `{count}` will be replaced with the number of selected values.
+
+### allowHTML
+
+**Type:** `Boolean` **Default:** `false`
+
+**Usage:** Whether HTML should be rendered in all elements. If `false`, all elements will be treated as plain text. If `true`, this can be used to perform XSS scripting attacks if you load options from a remote source.
+
+### classNames
+
+**Type:** `Object` **Default:**
+
+```
+classNames: {
+    select: "cs-select",
+    label: "cs-label",
+    dropdown: "cs-dropdown",
+    listing: "cs-listing",
+    option: "cs-option",
+    optionGroup: "cs-optionGroup",
+    optionGroupLabel: "cs-optionGroup-label",
+    optionGroupExpandInput: "cs-optionGroup-expandInput",
+    optionGroupListing: "cs-optionGroup-listing",
+    arrow: "cs-arrow",
+    checkbox: "cs-checkbox",
+    relative: "cs-relative",
+    openUp: "cs-open-up",
+    openDown: "cs-open-down",
+    selected: "cs-selected",
+    highlighted: "cs-highlighted",
+    disabled: "cs-disabled",
+    hidden: "cs-hidden",
+    selectedHidden: "cs-selectedHidden",
+    placeholder: "cs-placeholder",
+    searchWrapper: "cs-searchWrapper",
+    search: "cs-search",
+    searchNoResult: "cs-searchNoResult",
+    searchMark: "cs-searchMark",
+    selectedItem: "cs-selectedItem",
+    selectedItemLabel: "cs-selectedItem-label",
+    selectedItemRemove: "cs-selectedItem-remove",
+    dndHandle: "cs-dndHandle",
+}
+```
+
+**Usage:** The class names of the elements. E.g. `{ select: "class1 class2 class3" }`
+
+## Events
+
+### beforeOpen
+
+**Usage:** Triggered before the dropdown is opened.
+
+### afterOpen
+
+**Usage:** Triggered after the dropdown is opened.
+
+### beforeClose
+
+**Usage:** Triggered before the dropdown is closed.
+
+### afterClose
+
+**Usage:** Triggered after the dropdown is closed.
+
+### beforeChange
+
+**Usage:** Triggered before the value is changed.
+
+### afterChange
+
+**Usage:** Triggered after the value is changed.
+
+### afterSort
+
+**Usage:** Triggered after the options are sorted.
+
+## Methods
+
+### getSelectedValue()
+
+**Usage:** Get the selected value(s).
+
+### setSelectedValue(value)
+
+**Usage:** Set the selected value(s). If multiple select, value can be array.
+
+### getSelectedObj()
+
+**Usage:** Get the selected option object(s).
+
+### getOptionElBy(key, value)
+
+**Usage:** Get the option element by the key and value.
+
+### getOptionObjBy(key, value)
+
+**Usage:** Get the option object by the key and value.
+
+### getOptions()
+
+**Usage:** Get the options.
+
+### setOptions(options)
+
+**Usage:** Set the options.
+
+### enable()
+
+**Usage:** Enable the dropdown.
+
+### disable()
+
+**Usage:** Disable the dropdown.
+
+### destroy()
+
+**Usage:** Destroy the dropdown.

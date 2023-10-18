@@ -181,7 +181,7 @@ $cs-optionPadding: 8px 12px;
         // }
 
         .cs-option {
-            white-space: nowrap;
+            white-space: pre;
             display: flex;
             align-items: center;
             padding: $cs-optionPadding;

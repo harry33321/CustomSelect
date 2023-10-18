@@ -88,16 +88,20 @@
                     settings: {                        
                         alwaysOpen: false,
                         closeOnSelect: true,
-                        openDirection: "auto",          // "auto" (default) || "up" || "down"
-                        openPosition: "absolute",       // "absolute" (default) || "relative"
-                        openLocation: "body",           // html element || css selector
+                        openDirection: "auto",               // "auto" (default) || "up" || "down"
+                        openPosition: "absolute",            // "absolute" (default) || "relative"
+                        openLocation: "body",                // HTML element || css selector
                         searchEnable: true,
                         searchPlaceholder: "Search",
                         searchNoResult: "No result",
                         searchMark: true,
                         selectedOptionHidden: false,
-                        showCheckbox: false,
-                        classNames: {                   // e.g. { select: "class1 class2 class3" }
+                        checkboxMode: false,
+                        sortMode: false,
+                        maxValuesShown: 20,
+                        maxValuesLabel: "{count} selected",  // {count} will be replaced with the number of selected values
+                        allowHTML: false,
+                        classNames: {                        // e.g. { select: "class1 class2 class3" }
                             select: "cs-select",
                             label: "cs-label",
                             dropdown: "cs-dropdown",
@@ -125,6 +129,7 @@
                             selectedItem: "cs-selectedItem",
                             selectedItemLabel: "cs-selectedItem-label",
                             selectedItemRemove: "cs-selectedItem-remove",
+                            dndHandle: "cs-dndHandle",
                         },
                     },
                     events: {

@@ -532,13 +532,13 @@ class CustomSelect {
         } else {
             if (this.settings.openDirection == "auto") {
                 this.#openAuto();
-                this.intervalRejustPosition = setInterval(() => this.#openAuto(), 1000);
+                this.intervalRejustPosition = setInterval(() => this.#openAuto(), 500);
             } else if (this.settings.openDirection == "up") {
                 this.#openUp();
-                this.intervalRejustPosition = setInterval(() => this.#openUp(), 1000);
+                this.intervalRejustPosition = setInterval(() => this.#openUp(), 500);
             } else if (this.settings.openDirection == "down") {
                 this.#openDown();
-                this.intervalRejustPosition = setInterval(() => this.#openDown(), 1000);
+                this.intervalRejustPosition = setInterval(() => this.#openDown(), 500);
             }
         }
 
@@ -1009,8 +1009,8 @@ class CustomSelect {
 
     setOptions(options) {
         this.options = this.#createOptions(options);
-        this.destroy();
-        this.init();
+        this.filterOptions = this.options;
+        this.#renderOptions();
     }
 
     enable() {
@@ -1121,6 +1121,7 @@ const customSelect = new CustomSelect("#customSelect", {
             selectedItem: "cs-selectedItem",
             selectedItemLabel: "cs-selectedItem-label",
             selectedItemRemove: "cs-selectedItem-remove",
+            dndHandle: "cs-dndHandle",
         },
     },
     events: {
