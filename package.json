@@ -2,7 +2,7 @@
     "name": "custom-select.js",
     "version": "1.0.3",
     "description": "Custom select with search and multiple select",
-    "main": "customselect.min.js",
+    "main": "customselect.all.min.js",
     "keywords": [
         "select",
         "multipleselect",

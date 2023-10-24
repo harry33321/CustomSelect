@@ -16,9 +16,11 @@ From a [CDN](https://www.jsdelivr.com/package/npm/custom-select.js):
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/custom-select.js@latest/customselect.all.min.js"></script>
+```
 
-<!-- or -->
+Or, if you want to load the CSS separately:
 
+```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/custom-select.js@latest/customselect.min.css" />
 
 <script src="https://cdn.jsdelivr.net/npm/custom-select.js@latest/customselect.min.js"></script>
