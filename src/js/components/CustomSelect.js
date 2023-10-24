@@ -18,6 +18,7 @@ class CustomSelect {
 
         this.options = options || [];
         this.settings = {
+            allowDeselectAll: false,
             alwaysOpen: false,
             closeOnSelect: true,
             openDirection: "auto", // "auto" (default) || "up" || "down"
@@ -75,6 +76,7 @@ class CustomSelect {
             optionGroupExpandInput: "cs-optionGroup-expandInput",
             optionGroupListing: "cs-optionGroup-listing",
             arrow: "cs-arrow",
+            deselectAll: "cs-deselectAll",
             checkbox: "cs-checkbox",
             relative: "cs-relative",
             openUp: "cs-open-up",
@@ -107,28 +109,25 @@ class CustomSelect {
 
         // this.#appendCSS();
         this.init();
-        this.#setListen(true);
     }
 
-    async #appendCSS() {
+    #appendCSS() {
+        if (!this.settings.appendCSS) return;
+
         const styleId = "cs-css";
         if (document.getElementById(styleId)) return;
+        const style = document.createElement("style");
+        style.id = styleId;
+        document.head.appendChild(style);
 
-        const css = await fetch("https://cdn.jsdelivr.net/gh/harry33321/custom-select/dist/custom-select.min.css")
+        fetch("https://cdn.jsdelivr.net/npm/custom-select.js@latest/customselect.min.css")
             .then((response) => response.text())
             .then((data) => {
-                return data;
+                style.innerHTML = data;
             })
             .catch((error) => {
                 console.error(error);
             });
-
-        if (!css) return;
-
-        const style = document.createElement("style");
-        style.id = styleId;
-        style.innerHTML = css;
-        document.head.appendChild(style);
     }
 
     init() {
@@ -142,6 +141,11 @@ class CustomSelect {
                 this.setSelectedValue(e.target.value);
             }
         });
+        if (this.originalSelect.form) {
+            this.originalSelect.form.addEventListener("reset", () => {
+                this.setSelectedValue(this.getInitialValue());
+            });
+        }
 
         this.options = this.#createOptions(this.options);
         this.filterOptions = this.options;
@@ -154,15 +158,13 @@ class CustomSelect {
 
         this.#rejustPosition();
 
-        if (this.options.length) {
-            const defaultSelected = this.getOptions().filter((a) => a.selected);
-            const defaultValue = defaultSelected.map((a) => a.value);
-            this.setSelectedValue(defaultValue);
-        }
+        this.setSelectedValue(this.getInitialValue());
 
         if (this.settings.alwaysOpen) {
             this.#handleOpen();
         }
+
+        this.#setListen(true);
     }
 
     #optionObj(option) {
@@ -236,9 +238,19 @@ class CustomSelect {
         this.csLabel = mainLabel;
         mainDiv.appendChild(this.csLabel);
 
+        if (this.settings.allowDeselectAll) {
+            const mainDeselect = document.createElement("div");
+            mainDeselect.classList.add(...this.classesForAdd.deselectAll);
+            mainDeselect.addEventListener("click", (e) => {
+                e.stopPropagation();
+                this.isMultipleSelect ? this.setSelectedValue([]) : this.setSelectedValue("");
+            });
+            mainDiv.appendChild(mainDeselect);
+        }
+
         const mainArrow = document.createElement("div");
         mainArrow.classList.add(...this.classesForAdd.arrow);
-        mainArrow.innerHTML = `<svg viewBox="0 0 20 20"><path d="M2,6 L10,14 L18,6" /></svg>`;
+        mainArrow.innerHTML = `<svg width="24" viewBox="0 0 20 20"><path d="M2,6 L10,14 L18,6" /></svg>`;
         mainDiv.appendChild(mainArrow);
 
         this.csSelect = mainDiv;
@@ -389,7 +401,7 @@ class CustomSelect {
             expandIconDiv.classList.add(...this.classesForAdd.arrow);
             expandIconDiv.innerHTML = `
                 <input class="${this.classesForAdd.optionGroupExpandInput.join(" ")}" type="checkbox" ${option.groupExpanded ? "checked" : ""} tabindex="-1">
-                <svg viewBox="0 0 20 20"><path d="M2,6 L10,14 L18,6" /></svg>
+                <svg width="24" viewBox="0 0 20 20"><path d="M2,6 L10,14 L18,6" /></svg>
             `;
             optionGroupLabel.appendChild(expandIconDiv);
         }
@@ -791,11 +803,22 @@ class CustomSelect {
     }
 
     #renderLabelContent() {
-        if (this.selectedValue.length > this.settings.maxValuesShown) {
-            this.csLabel.innerHTML = this.settings.maxValuesLabel.replace("{count}", this.selectedValue.length);
-            return;
+        if (this.settings.allowDeselectAll) {
+            const btnDeselectAll = this.csSelect.querySelector(`.${this.classesForAdd.deselectAll.join(".")}`);
+            if (this.getSelectedValue().length) {
+                btnDeselectAll?.classList.remove(...this.classesForAdd.hidden);
+            } else {
+                btnDeselectAll?.classList.add(...this.classesForAdd.hidden);
+            }
         }
+
+        this.csLabel.innerHTML = "";
         if (this.isMultipleSelect) {
+            if (this.selectedValue.length > this.settings.maxValuesShown) {
+                this.csLabel.innerHTML = this.settings.maxValuesLabel.replace("{count}", this.selectedValue.length);
+                return;
+            }
+
             this.csLabel.innerHTML = this.getSelectedObj()
                 .map((a) => this.#multipleSelectedItemTemplate(a))
                 .join("");
@@ -945,6 +968,11 @@ class CustomSelect {
         return options.flatMap((item) => (Array.isArray(item[flatKey]) ? this.#flattenOptions(item[flatKey]) : item));
     }
 
+    getInitialValue() {
+        const initSelected = this.getOptions().filter((a) => a.selected);
+        return initSelected.map((a) => a.value);
+    }
+
     getSortedOptions() {
         return this.sortedOptions.length ? this.sortedOptions : [...this.getOptions(true)];
     }
@@ -985,7 +1013,7 @@ class CustomSelect {
         return this.isMultipleSelect ? selectedValue : selectedValue[0];
     }
 
-    setSelectedValue(value = "", runChange = true) {
+    setSelectedValue(value = [], runChange = true) {
         if (runChange && this.events.beforeChange(value, this.getSelectedValue(), this) === false) return;
 
         this.#originalSelectUnselect();
@@ -1026,6 +1054,7 @@ class CustomSelect {
     }
 
     destroy() {
+        this.#setListen(false);
         document.removeEventListener("click", (e) => this.#handleClickOutside(e));
         this.csSelect.remove();
         this.csDropdown.remove();
@@ -1046,7 +1075,7 @@ if (typeof module !== "undefined" && typeof module.exports !== "undefined") {
     <option value="" data-placeholder="true" selected disabled hidden>Please select</option>
     <option value="1">Option 1</option>
     <option value="2">Option 2</option>
-    <optgroup label="Group 1" data-expanded="off">
+    <optgroup label="Group 1" data-expanded="off">  // data-expanded="true" (default) || "false" || "off"
         <option value="3">Option 3</option>
         <option value="4">Option 4</option>
         <option value="5">Option 5</option>
@@ -1079,6 +1108,7 @@ const customSelect = new CustomSelect("#customSelect", {
         },
     ],
     settings: {                        
+        allowDeselectAll: false,
         alwaysOpen: false,
         closeOnSelect: true,
         openDirection: "auto",               // "auto" (default) || "up" || "down"

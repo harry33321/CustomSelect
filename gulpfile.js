@@ -12,10 +12,11 @@ const mode = require('gulp-mode')();
 
 const concat = require('gulp-concat');
 const named = require('vinyl-named');
+const insert = require('gulp-insert');
 
 const php2html = require("gulp-php2html");
 const htmlbeautify = require('gulp-html-beautify');
-
+const fs = require('fs');
 // clean tasks
 const clean = () => {
     return del(['dist/assets', 'dist/css', 'dist/js']);
@@ -91,18 +92,36 @@ const phpGenerator = () => {
 };
 
 const customselect = () => {
-    return src('src/js/components/customselect.js')
+    const fileName = 'customselect';
+    return src(`src/js/components/${fileName}.js`)
         .pipe(named())
         .pipe(
             rename(function (path) {
                 return {
                     dirname: path.dirname,
-                    basename: path.basename,
+                    basename: fileName,
                     extname: '.min.js',
                 };
             })
         )
         .pipe(mode.production(terser({ output: { comments: false } })))
+        .pipe(dest('./'))
+        .pipe(insert.append(`
+if (typeof document !== "undefined") {
+    const style = document.createElement("style");
+    document.head.appendChild(style);
+    style.innerHTML = \`` + fs.readFileSync('./customselect.min.css') + `\`
+}
+        `))
+        .pipe(
+            rename(function (path) {
+                return {
+                    dirname: path.dirname,
+                    basename: fileName,
+                    extname: '.all.min.js',
+                };
+            })
+        )
         .pipe(dest('./'));
 }
 
@@ -130,9 +149,10 @@ const watchForChanges = () => {
     // watch('php/**/*.php', phpGenerator);
     watch('src/**/*.js', js);
     watch('src/assets/**/*', copyAssets);
+    watch('src/scss/components/customselect.scss', customselect_css);
     watch('src/js/components/customselect.js', customselect);
 };
 
 // public tasks
-exports.default = series(clean, parallel(css, css_page, js, copyAssets, customselect, customselect_css), watchForChanges);
-exports.build = series(clean, parallel(css, css_page, js, copyAssets, customselect, customselect_css));
+exports.default = series(clean, parallel(css, css_page, js, copyAssets), customselect_css, customselect, watchForChanges);
+exports.build = series(clean, parallel(css, css_page, js, copyAssets), customselect_css, customselect);

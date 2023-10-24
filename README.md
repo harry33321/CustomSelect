@@ -15,6 +15,10 @@ From a [CDN](https://www.jsdelivr.com/package/npm/custom-select.js):
 **Note:** There is sometimes a delay before the latest version of Choices is reflected on the CDN.
 
 ```html
+<script src="https://cdn.jsdelivr.net/npm/custom-select.js@latest/customselect.all.min.js"></script>
+
+<!-- or -->
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/custom-select.js@latest/customselect.min.css" />
 
 <script src="https://cdn.jsdelivr.net/npm/custom-select.js@latest/customselect.min.js"></script>
@@ -48,7 +52,7 @@ new CustomSelect("#customSelect_single");
     <option value="" data-placeholder="true" selected disabled hidden>Please select</option>
     <option value="1">Option 1</option>
     <option value="2">Option 2</option>
-    <optgroup label="Group 1" data-expanded="off">
+    <optgroup label="Group 1" data-expanded="off">  // data-expanded="true" (default) || "false" || "off"
         <option value="3">Option 3</option>
         <option value="4">Option 4</option>
         <option value="5">Option 5</option>
@@ -81,6 +85,7 @@ const customSelect = new CustomSelect("#customSelect", {
         },
     ],
     settings: {                        
+        allowDeselectAll: false,
         alwaysOpen: false,
         closeOnSelect: true,
         openDirection: "auto",               // "auto" (default) || "up" || "down"
@@ -107,6 +112,7 @@ const customSelect = new CustomSelect("#customSelect", {
             optionGroupExpandInput: "cs-optionGroup-expandInput",
             optionGroupListing: "cs-optionGroup-listing",
             arrow: "cs-arrow",
+            deselectAll: "cs-deselectAll",
             checkbox: "cs-checkbox",
             relative: "cs-relative",
             openUp: "cs-open-up",
@@ -124,6 +130,7 @@ const customSelect = new CustomSelect("#customSelect", {
             selectedItem: "cs-selectedItem",
             selectedItemLabel: "cs-selectedItem-label",
             selectedItemRemove: "cs-selectedItem-remove",
+            dndHandle: "cs-dndHandle",
         },
     },
     events: {
@@ -167,6 +174,12 @@ customSelect.getSortedOptions();
 ```
 
 ## Configuration Options
+
+### allowDeselectAll
+
+**Type:** `Boolean` **Default:** `false`
+
+**Usage:** Whether the deselect all button should be shown.
 
 ### alwaysOpen
 
@@ -274,6 +287,7 @@ classNames: {
     optionGroupExpandInput: "cs-optionGroup-expandInput",
     optionGroupListing: "cs-optionGroup-listing",
     arrow: "cs-arrow",
+    deselectAll: "cs-deselectAll",
     checkbox: "cs-checkbox",
     relative: "cs-relative",
     openUp: "cs-open-up",

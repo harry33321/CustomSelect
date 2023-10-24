@@ -61,6 +61,19 @@
             <span class="title">Configs</span>
 
             <pre><code>
+                <select id="customSelect" multiple>
+                    <option value="" data-placeholder="true" selected disabled hidden>Please select</option>
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <optgroup label="Group 1" data-expanded="off">  // data-expanded="true" (default) || "false" || "off"
+                        <option value="3">Option 3</option>
+                        <option value="4">Option 4</option>
+                        <option value="5">Option 5</option>
+                    </optgroup>
+                </select>
+            </code></pre>
+
+            <pre><code>
                 const select = new CustomSelect("#select", {
                     options: [                          // if options is empty, it will get options from html select element
                         {
@@ -86,6 +99,7 @@
                         },
                     ],
                     settings: {                        
+                        allowDeselectAll: false,
                         alwaysOpen: false,
                         closeOnSelect: true,
                         openDirection: "auto",               // "auto" (default) || "up" || "down"
@@ -112,6 +126,7 @@
                             optionGroupExpandInput: "cs-optionGroup-expandInput",
                             optionGroupListing: "cs-optionGroup-listing",
                             arrow: "cs-arrow",
+                            deselectAll: "cs-deselectAll",
                             checkbox: "cs-checkbox",
                             relative: "cs-relative",
                             openUp: "cs-open-up",
@@ -247,7 +262,7 @@
             <pre><code class="language-javascript">
                 new CustomSelect("#customSelect_checkbox", {
                     settings: {
-                        showCheckbox: true,
+                        checkboxMode: true,
                     },
                 });
             </code></pre>
