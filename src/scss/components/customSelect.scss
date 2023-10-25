@@ -126,6 +126,7 @@ $cs-optionPadding: 8px 12px;
     &:not(.cs-open-down, .cs-open-up) {
         opacity: 0;
         transform: scaleY(0);
+        height: 0;
     }
 
     &.cs-open-up {

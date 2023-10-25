@@ -18,8 +18,34 @@
 </head>
 
 <body>
+    <label class="menuToggle">
+        <input type="checkbox" />
+    </label>
+    <nav>
+        <a href="#singleSelect">Simple Usage</a>
+        <a href="#mutipleSelect">Mutiple Select</a>
+        <a href="#configs">Configs</a>
+        <a href="#placeholder">Placeholder</a>
+        <a href="#inlineCSS">inlineCSS</a>
+        <a href="#allowDeselectAll">allowDeselectAll</a>
+        <a href="#alwaysOpen">alwaysOpen</a>
+        <a href="#closeOnSelect">closeOnSelect</a>
+        <a href="#openDirection">openDirection</a>
+        <a href="#openPosition">openPosition</a>
+        <a href="#openLocation">openLocation</a>
+        <a href="#searchEnable">searchEnable</a>
+        <a href="#searchPlaceholder">searchPlaceholder</a>
+        <a href="#searchNoResult">searchNoResult</a>
+        <a href="#searchMark">searchMark</a>
+        <a href="#selectedOptionHidden">selectedOptionHidden</a>
+        <a href="#checkboxMode">checkboxMode</a>
+        <a href="#sortMode">sortMode</a>
+        <a href="#maxValuesShown">maxValuesShown</a>
+        <a href="#maxValuesLabel">maxValuesLabel</a>
+        <a href="#allowHTML">allowHTML</a>
+    </nav>
     <main>
-        <div class="container">
+        <div class="container" id="singleSelect">
             <span class="title">Simple Usage</span>
 
             <div class="selectWrapper">
@@ -39,7 +65,7 @@
             </code></pre>
         </div>
 
-        <div class="container">
+        <div class="container" id="mutipleSelect">
             <span class="title">Mutiple Select</span>
 
             <div class="selectWrapper">
@@ -55,7 +81,7 @@
             </div>
         </div>
 
-        <div class="container">
+        <div class="container" id="configs">
             <span class="title">Configs</span>
 
             <pre><code>
@@ -182,7 +208,7 @@
             </code></pre>
         </div>
 
-        <div class="container">
+        <div class="container" id="placeholder">
             <span class="title">Placeholder</span>
             <p>
                 for HTML - option of data-placeholder="true" must set the value to empty string
@@ -241,12 +267,306 @@
             </code></pre>
         </div>
 
-        <div class="container">
-            <span class="title">Checkbox Style</span>
+        <div class="container" id="inlineCSS">
+            <span class="title">inlineCSS</span>
+
+            <div class="selectWrapper">
+                <select id="customSelect_inlineCSS">
+                    <option style="color: blue;" value="1">Option 1</option>
+                    <option style="color: red;" value="2">Option 2</option>
+                </select>
+            </div>
+
+            <pre><code class="language-javascript">
+                new CustomSelect("#customSelect_inlineCSS", {
+                    options: [
+                        {
+                            label: "Option 1",
+                            value: "1",
+                            style: "color: blue;",
+                        },
+                        {
+                            label: "Option 2",
+                            value: "2",
+                            style: "color: red;",
+                        },
+                    ],
+                });
+            </code></pre>
+        </div>
+
+        <div class="container" id="allowDeselectAll">
+            <span class="title">allowDeselectAll</span>
+
+            <div class="selectWrapper">
+                <select id="customSelect_allowDeselectAll" multiple>
+                    <option value="1">Option 1</option>
+                    <option value="2" selected>Option 2</option>
+                    <optgroup label="Group 1">
+                        <option value="3" selected>Option 3</option>
+                        <option value="4">Option 4</option>
+                        <option value="5">Option 5</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <pre><code class="language-javascript">
+                new CustomSelect("#customSelect_allowDeselectAll", {
+                    settings: {
+                        allowDeselectAll: true, // true || false (default)
+                    },
+                });
+            </code></pre>
+        </div>
+
+        <div class="container" id="alwaysOpen">
+            <span class="title">alwaysOpen</span>
+
+            <div class="selectWrapper">
+                <select id="customSelect_alwaysOpen">
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <optgroup label="Group 1">
+                        <option value="3">Option 3</option>
+                        <option value="4">Option 4</option>
+                        <option value="5">Option 5</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <pre><code class="language-javascript">
+                const customSelect_alwaysOpen = document.querySelector("#customSelect_alwaysOpen");
+                new CustomSelect(customSelect_alwaysOpen, {
+                    settings: {
+                        alwaysOpen: true, // true || false (default)
+                        openPosition: "relative", // "absolute" (default) || "relative"
+                        openLocation: customSelect_alwaysOpen.parentElement, // HTML element || css selector
+                    },
+                });
+            </code></pre>
+        </div>
+
+        <div class="container" id="closeOnSelect">
+            <span class="title">closeOnSelect</span>
+
+            <div class="selectWrapper">
+                <select id="customSelect_closeOnSelect">
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <optgroup label="Group 1">
+                        <option value="3">Option 3</option>
+                        <option value="4">Option 4</option>
+                        <option value="5">Option 5</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <pre><code class="language-javascript">
+                new CustomSelect("#customSelect_closeOnSelect", {
+                    settings: {
+                        closeOnSelect: false, // true (default) || false
+                    },
+                });
+            </code></pre>
+        </div>
+
+        <div class="container" id="openDirection">
+            <span class="title">openDirection</span>
+
+            <div class="selectWrapper">
+                <select id="customSelect_openDirection">
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <optgroup label="Group 1">
+                        <option value="3">Option 3</option>
+                        <option value="4">Option 4</option>
+                        <option value="5">Option 5</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <pre><code class="language-javascript">
+                new CustomSelect("#customSelect_openDirection", {
+                    settings: {
+                        openDirection: "up", // "auto" (default) || "up" || "down"
+                    },
+                });
+            </code></pre>
+        </div>
+
+        <div class="container" id="openPosition">
+            <span class="title">openPosition</span>
+
+            <div class="selectWrapper">
+                <select id="customSelect_openPosition">
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <optgroup label="Group 1">
+                        <option value="3">Option 3</option>
+                        <option value="4">Option 4</option>
+                        <option value="5">Option 5</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <pre><code class="language-javascript">
+                const customSelect_openPosition = document.querySelector("#customSelect_openPosition");
+                new CustomSelect("#customSelect_openPosition", {
+                    settings: {
+                        openPosition: "relative", // "absolute" (default) || "relative"
+                        openLocation: customSelect_openPosition.parentElement, // HTML element || css selector
+                    },
+                });
+            </code></pre>
+        </div>
+
+        <div class="container" id="openLocation">
+            <span class="title">openLocation</span>
+
+            <div class="selectWrapper">
+                <select id="customSelect_openLocation">
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <optgroup label="Group 1">
+                        <option value="3">Option 3</option>
+                        <option value="4">Option 4</option>
+                        <option value="5">Option 5</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <pre><code class="language-javascript">
+                const customSelect_openLocation = document.querySelector("#customSelect_openLocation");
+                new CustomSelect("#customSelect_openLocation", {
+                    settings: {
+                        openLocation: "body", // HTML element || css selector
+                    },
+                });
+            </code></pre>
+        </div>
+
+        <div class="container" id="searchEnable">
+            <span class="title">searchEnable</span>
+
+            <div class="selectWrapper">
+                <select id="customSelect_searchEnable">
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <optgroup label="Group 1">
+                        <option value="3">Option 3</option>
+                        <option value="4">Option 4</option>
+                        <option value="5">Option 5</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <pre><code class="language-javascript">
+                new CustomSelect("#customSelect_searchEnable", {
+                    settings: {
+                        searchEnable: false, // true (default) || false
+                    },
+                });
+            </code></pre>
+        </div>
+
+        <div class="container" id="searchPlaceholder">
+            <span class="title">searchPlaceholder</span>
+
+            <div class="selectWrapper">
+                <select id="customSelect_searchPlaceholder">
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <optgroup label="Group 1">
+                        <option value="3">Option 3</option>
+                        <option value="4">Option 4</option>
+                        <option value="5">Option 5</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <pre><code class="language-javascript">
+                new CustomSelect("#customSelect_searchPlaceholder", {
+                    settings: {
+                        searchPlaceholder: "input search text here", // default: "Search"
+                    },
+                });
+            </code></pre>
+        </div>
+
+        <div class="container" id="searchNoResult">
+            <span class="title">searchNoResult</span>
+
+            <div class="selectWrapper">
+                <select id="customSelect_searchNoResult">
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <optgroup label="Group 1">
+                        <option value="3">Option 3</option>
+                        <option value="4">Option 4</option>
+                        <option value="5">Option 5</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <pre><code class="language-javascript">
+                new CustomSelect("#customSelect_searchNoResult", {
+                    settings: {
+                        searchNoResult: "result not found", // default: "No result"
+                    },
+                });
+            </code></pre>
+        </div>
+
+        <div class="container" id="searchMark">
+            <span class="title">searchMark</span>
+
+            <div class="selectWrapper">
+                <select id="customSelect_searchMark">
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <optgroup label="Group 1">
+                        <option value="3">Option 3</option>
+                        <option value="4">Option 4</option>
+                        <option value="5">Option 5</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <pre><code class="language-javascript">
+                new CustomSelect("#customSelect_searchMark", {
+                    settings: {
+                        searchMark: false, // true (default) || false
+                    },
+                });
+            </code></pre>
+        </div>
+
+        <div class="container" id="selectedOptionHidden">
+            <span class="title">selectedOptionHidden</span>
+
+            <div class="selectWrapper">
+                <select id="customSelect_selectedOptionHidden">
+                    <option value="en">EN</option>
+                    <option value="tc">繁</option>
+                    <option value="sc">简</option>
+                </select>
+            </div>
+
+            <pre><code class="language-javascript">
+                new CustomSelect("#customSelect_selectedOptionHidden", {
+                    settings: {
+                        searchEnable: false, // true (default) || false
+                        selectedOptionHidden: true, // true || false (default)
+                    },
+                });
+            </code></pre>
+        </div>
+
+        <div class="container" id="checkboxMode">
+            <span class="title">checkboxMode</span>
 
             <div class="selectWrapper">
                 <select id="customSelect_checkbox">
-                    <option value="" data-placeholder="true">Please select</option>
                     <option value="1">Option 1</option>
                     <option value="2">Option 2</option>
                     <optgroup label="Group 1">
@@ -266,8 +586,8 @@
             </code></pre>
         </div>
 
-        <div class="container">
-            <span class="title">Sort Mode</span>
+        <div class="container" id="sortMode">
+            <span class="title">sortMode</span>
             <p>
                 Usually use for table column setting
             </p>
@@ -300,6 +620,82 @@
                 });
 
                 const sortedOptions = customSelect_sortMode.getSortedOptions();
+            </code></pre>
+        </div>
+
+        <div class="container" id="maxValuesShown">
+            <span class="title">maxValuesShown</span>
+            <p>If the number of selected values is greater than maxValuesShown, the selected values will be hidden and show the maxValuesLabel.</p>
+
+            <div class="selectWrapper">
+                <select id="customSelect_maxValuesShown" multiple>
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <optgroup label="Group 1">
+                        <option value="3">Option 3</option>
+                        <option value="4">Option 4</option>
+                        <option value="5">Option 5</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <pre><code class="language-javascript">
+                new CustomSelect("#customSelect_maxValuesShown", {
+                    settings: {
+                        maxValuesShown: 1, // 20 (default) || number
+                    },
+                });
+            </code></pre>
+        </div>
+
+        <div class="container" id="maxValuesLabel">
+            <span class="title">maxValuesLabel</span>
+
+            <div class="selectWrapper">
+                <select id="customSelect_maxValuesLabel" multiple>
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <optgroup label="Group 1">
+                        <option value="3">Option 3</option>
+                        <option value="4">Option 4</option>
+                        <option value="5">Option 5</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <pre><code class="language-javascript">
+                new CustomSelect("#customSelect_maxValuesLabel", {
+                    settings: {
+                        maxValuesShown: 1, // 20 (default) || number
+                        maxValuesLabel: "{count} values selected", // {count} will be replaced with the number of selected values
+                    },
+                });
+            </code></pre>
+        </div>
+
+        <div class="container" id="allowHTML">
+            <span class="title">allowHTML</span>
+
+            <div class="selectWrapper">
+                <select id="customSelect_allowHTML"></select>
+            </div>
+
+            <pre><code class="language-javascript">
+                new CustomSelect("#customSelect_allowHTML", {
+                    options: [
+                        {
+                            label: "<u>Option 1</u>",
+                            value: "1",
+                        },
+                        {
+                            label: "<b>Option 2</b>",
+                            value: "2",
+                        },
+                    ],
+                    settings: {
+                        allowHTML: true, // true || false (default)
+                    },
+                });
             </code></pre>
         </div>
     </main>

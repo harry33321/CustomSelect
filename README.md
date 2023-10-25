@@ -12,7 +12,7 @@ npm install custom-select.js
 
 From a [CDN](https://www.jsdelivr.com/package/npm/custom-select.js):
 
-**Note:** There is sometimes a delay before the latest version of Choices is reflected on the CDN.
+**Note:** There is sometimes a delay before the latest version of the package is available on the CDN.
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/custom-select.js@latest/customselect.all.min.js"></script>
