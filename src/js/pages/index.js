@@ -131,10 +131,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
         },
     });
 
-    window.scrollTo({
-        top: getScrollTopValue(window.location.hash),
-        behavior: "smooth",
-    });
+    if (window.location.hash) {
+        window.scrollTo({
+            top: getScrollTopValue(window.location.hash),
+            behavior: "smooth",
+        });
+    }
 
     const itemList = document.querySelectorAll('.container');
     const navList = document.querySelectorAll('nav a');
@@ -144,7 +146,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
         const scrollValue = scrollTop - headerHeight;
 
         itemList.forEach((item, index) => {
-            console.log(scrollValue, item.offsetTop)
             if (scrollValue >= item.offsetTop - 40) {
                 navList.forEach((item2, index2) => {
                     item2.classList.remove('active');
