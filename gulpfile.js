@@ -14,8 +14,8 @@ const concat = require('gulp-concat');
 const named = require('vinyl-named');
 const insert = require('gulp-insert');
 
-const php2html = require("gulp-php2html");
-const htmlbeautify = require('gulp-html-beautify');
+// const php2html = require("gulp-php2html");
+// const htmlbeautify = require('gulp-html-beautify');
 const fs = require('fs');
 // clean tasks
 const clean = () => {
@@ -84,12 +84,12 @@ const copyAssets = () => {
 };
 
 // php to html
-const phpGenerator = () => {
-    return src(['php/**/*.php', '!php/include_html/**/*'])
-        .pipe(php2html())
-        .pipe(htmlbeautify())
-        .pipe(dest('dist'));
-};
+// const phpGenerator = () => {
+//     return src(['php/**/*.php', '!php/include_html/**/*'])
+//         .pipe(php2html())
+//         .pipe(htmlbeautify())
+//         .pipe(dest('dist'));
+// };
 
 const customselect = () => {
     const fileName = 'customselect';

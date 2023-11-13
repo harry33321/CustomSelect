@@ -30,9 +30,9 @@
         "build": "gulp build --production"
     },
     "devDependencies": {
-        "@babel/core": "^7.10.2",
-        "@babel/plugin-proposal-optional-chaining": "^7.16.0",
-        "@babel/preset-env": "^7.10.2",
+        "@babel/core": "^7.23.3",
+        "@babel/plugin-proposal-optional-chaining": "^7.21.0",
+        "@babel/preset-env": "^7.23.3",
         "css-loader": "^6.8.1",
         "del": "^5.1.0",
         "gulp": "^4.0.2",
@@ -40,16 +40,17 @@
         "gulp-babel": "^8.0.0",
         "gulp-concat": "^2.6.1",
         "gulp-csso": "^4.0.1",
-        "gulp-dart-sass": "^1.0.2",
-        "gulp-html-beautify": "^1.0.1",
+        "gulp-dart-sass": "^1.1.0",
         "gulp-insert": "^0.5.0",
         "gulp-mode": "^1.1.0",
-        "gulp-php2html": "^0.0.8",
         "gulp-rename": "^2.0.0",
         "gulp-terser": "^2.1.0",
         "style-loader": "^3.3.3",
         "vinyl-named": "^1.1.0",
         "webpack-stream": "^7.0.0"
+    },
+    "overrides": {
+        "glob-parent": "6.0.2"
     },
     "dependencies": {
         "sortablejs": "^1.15.0"
